@@ -1,1 +1,1 @@
-import {createUsers} from './data.js';
+import './pictures.js';
