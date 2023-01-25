@@ -5,7 +5,7 @@ import { addPictureEventHandler } from './full-picture.js';
 const pictureTemplate = document.querySelector('#picture').content;
 const pictureItemTemplate = pictureTemplate.querySelector('.picture');
 const picturesList = document.querySelector('.pictures');
-const fragment = new DocumentFragment;
+const picturesItems = [];
 
 const createPictureItem = (item) => {
   const newPicture = pictureItemTemplate.cloneNode(true);
@@ -18,13 +18,26 @@ const createPictureItem = (item) => {
   return newPicture;
 };
 
-const showPictures = (pictures) => {
-  for (const item of pictures) {
-    fragment.appendChild(createPictureItem(item));
-  }
-  picturesList.appendChild(fragment);
+const deleteAllPictures = () => {
+  const pictures = picturesList.querySelectorAll('.picture');
+  pictures.forEach((picture) => {
+    picturesList.removeChild(picture);
+  });
 };
 
-getRequest(showPictures, loadErrored, 'GET')();
+const showPictures = (pictures) => {
+  deleteAllPictures();
+  const fragment = new DocumentFragment;
+  pictures.forEach((picture) => fragment.appendChild(picture));
+  picturesList.appendChild(fragment);
+  document.querySelector('.img-filters').classList.remove('img-filters--inactive');
+};
 
-export {picturesList};
+const loadPictures = (pictures) => {
+  pictures.forEach((picture) => picturesItems.push(createPictureItem(picture)));
+  showPictures(picturesItems);
+};
+
+getRequest(loadPictures, loadErrored, 'GET')();
+
+export { showPictures, picturesItems };
