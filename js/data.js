@@ -48,6 +48,6 @@ const createUser = () => {
   return user;
 };
 
-const createUsers =  Array.from({length: USERS_COUNT}, createUser);
+const createdPictures =  Array.from({length: USERS_COUNT}, createUser);
 
-export {createUsers};
+export {createdPictures};

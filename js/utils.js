@@ -17,6 +17,4 @@ const getNonExistenObject = (existingObjects, min, max) => {
   return id;
 };
 
-const isStringLengthNormal = (string, maxLength) => String.length(string) <= maxLength;
-
 export {getRandomInteger, getNonExistenObject};
